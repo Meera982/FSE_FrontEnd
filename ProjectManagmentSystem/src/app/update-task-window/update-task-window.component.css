@@ -1,0 +1,32 @@
+.container{
+    margin-left: 35px;
+    margin-top: 10px;  
+}
+.checkbox-style{
+    margin-left: 10%;
+}
+.col-form-label{
+    font-weight: bold;
+}
+.checkbox-style{
+    margin-left: 27%;
+    margin-top:1%;
+    margin-right: 1%;
+}
+.search-button{
+    margin-top: 1%; 
+    width:0px;
+    padding-left: 20px;
+    padding-right: 60px;
+}
+#reset{
+    margin-left:2%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#add{
+    margin-left:70%;
+    display: inline-block;
+    vertical-align: top;
+}

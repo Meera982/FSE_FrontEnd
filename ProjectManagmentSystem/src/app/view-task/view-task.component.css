@@ -1,0 +1,43 @@
+.container{
+    margin-left: 35px;
+    margin-top: 10px;  
+}
+
+.col-form-label,.col-heading{
+    font-weight: bold;
+}
+
+.search-button{
+    margin-top: 1%; 
+    width:0px;
+    padding-left: 20px;
+    padding-right: 60px;
+}
+.sort-style{
+    margin-top:1%;
+    margin-left:.5%;   
+}
+.sort{
+    margin-left:3px;
+    margin-right:5px;
+    width:8%;
+    height:10%;
+    
+}
+.list-task-row{
+    padding:2%;    
+}
+.task-name{
+    background-color: #F4F1F0;
+   border: 1px solid white;
+}
+.col-value{
+    padding:3%;
+}
+.col-heading{
+    padding-left:3%;
+}
+.col-heading-priority{
+    padding-left:1%;
+    font-weight: bold;
+}

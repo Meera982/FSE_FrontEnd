@@ -1,0 +1,45 @@
+<div class="container"> 
+    <form class="form-horizontal" [formGroup]="registerForm">  
+        <div class="form-group row">
+            <label for="manager" class="col-xs-2 col-form-label">Project:</label>
+            <div class="col-sm-3">
+              <input type="text"  formControlName="project" id="project" class="form-control">
+            </div>
+            <div class="col-xs-2">
+              <button type="button" id="searchProject" class="btn btn-dark btn-sm list-btn search-button" (click)="openProjectModal()">Search</button>
+            </div>
+            <span style="padding-right:1%;padding-left:1%;padding-top:.25%;font-weight:bold;">Sort Task By:</span>
+      <button class="sort btn btn-dark btn-sm" data-sort="startDate"(click)="sortByDate('startDate')">Start Date</button>
+      <button class="sort btn btn-dark btn-sm" data-sort="endDate"(click)="sortByDate('endDate')">End Date</button>
+      <button class="sort btn btn-dark btn-sm" data-sort="priority"(click)="sortByPriority('priority')">Priority</button>
+      <button class="sort btn btn-dark btn-sm" data-sort="status"(click)="sortByCompleted('status')">Completed</button>
+        </div> 
+    </form> 
+    <hr style="border-top: 2px dotted darkblue;">
+    <div class="row" *ngFor="let taskItem of taskList">
+        <div class="col-md-12">
+            <div class="list-group list">
+                <div class="row list-task-row">
+                    <div class="col col-md-2 col-heading">Task</div> 
+                    <div class="col col-md-2 col-heading">Parent</div>   
+                    <div class="col col-md-1 col-heading-priority">Priority</div>
+                    <div class="col col-md-2 col-heading">Start Date</div>  
+                    <div class="col col-md-2 col-heading">End Date</div>             
+                    <div class="col col-md-1"></div>
+                    <div class="col col-md-2"></div>
+                </div> 
+                <div class="row">
+                    <div class="col col-md-2 task-name col-value">{{taskItem.taskName}}</div> 
+                    <div class="col col-md-2 task-name col-value">{{taskItem.parentTask.parentTaskName}}</div>   
+                    <div class="col col-md-1 col-value">{{taskItem.priority}}</div>
+                    <div class="col col-md-2 col-value">{{taskItem.startDate}}</div>  
+                    <div class="col col-md-2 col-value">{{taskItem.endDate}}</div>             
+                    <div class="col col-md-1 col-value"><button type="button" id="update" (click)="updateTask(taskItem)" class="btn btn-dark btn-sm list-btn">Edit</button></div>
+                    <div class="col col-md-2 col-value"><button type="button" id="endtask" (click)="endTask(taskItem)" class="btn btn-dark btn-sm list-btn">End Task</button></div>         
+                </div>                              
+            </div>
+            <hr style="border-top: 2px solid #F4F1F0">           
+        </div>
+    </div>
+</div>
+

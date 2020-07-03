@@ -1,0 +1,78 @@
+<div class="container">
+    <form class="form-horizontal" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group row">
+            <label for="manager" class="col-md-3 col-form-label">Project:</label>
+            <div class="col-sm-6">
+              <input type="text"  formControlName="project"  [(ngModel)]="task.project" id="project" class="form-control" [ngClass]="{ 'is-invalid': submitted &amp;&amp; registerForm.controls.project.errors }">
+              <div *ngIf="submitted &amp;&amp; registerForm.controls.project.errors" class="text-danger">
+                <div *ngIf="registerForm.controls.project.errors.required">Project is required</div>
+            </div>
+            </div>
+            <div class="col-sm-2">
+              <button type="button" id="searchProject" class="btn btn-dark btn-sm list-btn search-button" (click)="openProjectModal()">Search</button>
+            </div>
+        </div> 
+        <div class="form-group row">
+            <label for="manager" class="col-md-3 col-form-label">Task:</label>
+            <div class="col-sm-8">
+              <input type="text"  formControlName="taskName"  [(ngModel)]="task.taskName" id="taskName" class="form-control" [ngClass]="{ 'is-invalid': submitted &amp;&amp; registerForm.controls.taskName.errors }">
+              <div *ngIf="submitted &amp;&amp; registerForm.controls.taskName.errors" class="text-danger">
+                <div *ngIf="registerForm.controls.project.errors.required">Task name is required</div>
+            </div>
+            </div>            
+        </div> 
+        <div class="form-group row">
+            <div class="col-xs-1 checkbox-style"><input type="checkbox" [checked] = "isEnabled()" id="parentTaskEntity" aria-label="Checkbox for following text input" (change)="onCheckboxChange($event)"></div>
+            <label for="dateEnabled" class="col-xs-4 col-form-label">Parent Task</label>
+        </div>
+        <div class="form-group row">
+            <label for="sliderLabel" class="col-md-3 col-form-label">Priority:</label>
+            <div class="col-sm-8"> <ng5-slider [(value)]="value" [options]="options"></ng5-slider> </div>
+        </div>
+        <div class="form-group row">
+            <label for="parentTask" class="col-md-3 col-form-label">Parent Task:</label>
+            <div class="col-sm-6">
+              <input type="text"  formControlName="parentTask"  [(ngModel)]="task.parentTaskName" id="parentTask" class="form-control" [ngClass]="{ 'is-invalid': submitted &amp;&amp; registerForm.controls.parentTask.errors }">
+              <div *ngIf="submitted &amp;&amp; registerForm.controls.parentTask.errors" class="text-danger">
+                <div *ngIf="registerForm.controls.project.errors.required">Parent Task is required</div>
+            </div>
+            </div>
+            <div class="col-sm-2">
+              <button type="button" id="searchParentTask" class="btn btn-dark btn-sm list-btn search-button" (click)="openParentTaskModal()">Search</button>
+            </div>
+        </div>        
+        <div class="form-group row">
+            <label for="startDate" class="col-md-3 col-form-label">Start Date:</label>
+            <div class="col-md-3 form-group">
+                <input type="text" formControlName="startDate" [(ngModel)]="task.startDate"  id="startDate" class="form-control date-input-style" bsDatepicker [ngClass]="{ 'is-invalid': submitted &amp;&amp; registerForm.controls.startDate.errors }">
+                <div *ngIf="submitted &amp;&amp; registerForm.controls.startDate.errors" class="text-danger">
+                  <div *ngIf="registerForm.controls.startDate.errors.required">Start Date is required</div>
+              </div>
+              </div>
+              <label for="endDate" class="col-sm-2 col-form-label">End Date:</label>
+              <div class="col-md-3 form-group">
+                <input type="text" formControlName="endDate" [(ngModel)]="task.endDate"  id="endDate" class="form-control date-input-style" bsDatepicker [ngClass]="{ 'is-invalid': submitted &amp;&amp; registerForm.controls.endDate.errors }" (blur)="compareTwoDates()">
+                <div *ngIf="submitted &amp;&amp; registerForm.controls.endDate.errors" class="text-danger">
+                  <div *ngIf="registerForm.controls.endDate.errors.required">End Date is required</div>
+              </div>
+              <div *ngIf="dateError.isError" class="alert alert-danger">
+                {{ dateError.errorMessage }}
+             </div>
+              </div>
+        </div>
+        <div class="form-group row">
+            <label for="username" class="col-md-3 col-form-label">User:</label>
+            <div class="col-sm-6">
+              <input type="text"  formControlName="username"  [(ngModel)]="task.username" id="parentTask" class="form-control" [ngClass]="{ 'is-invalid': submitted &amp;&amp; registerForm.controls.username.errors }">
+              <div *ngIf="submitted &amp;&amp; registerForm.controls.username.errors" class="text-danger">
+                <div *ngIf="registerForm.controls.username.errors.required">User is required</div>
+            </div>
+            </div>
+            <div class="col-sm-2">
+              <button type="button" id="searchUserTask" class="btn btn-dark btn-sm list-btn search-button" (click)="openUserModal()">Search</button>
+            </div>
+        </div>
+        <button type="submit" id="add" class="btn btn-dark btn-sm">{{submitButtonName}}</button>
+        <button type="reset" id="reset" class="btn btn-dark btn-sm">Reset</button> 
+    </form>
+</div>

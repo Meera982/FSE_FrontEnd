@@ -1,0 +1,39 @@
+.container{
+    margin-left: 35px;
+    margin-top: 10px;
+  
+}
+.col-form-label{
+    font-weight: bold;
+}
+
+
+#reset{
+    margin-left:2%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#add{
+    margin-left:65%;
+    display: inline-block;
+    vertical-align: top;
+}
+.sort{
+    margin:5px;
+}
+
+.user-list-item{
+    line-height: 30px;
+}
+#edit, #delete{
+    margin-bottom: 2px;
+}
+.list-btn{
+    width:0px;
+    padding-left: 30px;
+    padding-right: 60px;
+}
+
+
+

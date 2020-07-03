@@ -1,0 +1,90 @@
+<div class="container">
+    <form class="form-horizontal" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group row">
+          <label for="projectName" class="col-md-3 col-form-label">Project:</label>
+          <div class="col-sm-8">
+            <input type="text"  formControlName="projectName" [(ngModel)]="project.projectName" class="form-control" id="projectName" [ngClass]="{ 'is-invalid': submitted &amp;&amp; registerForm.controls.projectName.errors }">
+            <div *ngIf="submitted &amp;&amp; registerForm.controls.projectName.errors" class="text-danger">
+              <div *ngIf="registerForm.controls.projectName.errors.required">Project title is required</div>
+          </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-xs-1 checkbox-style"><input type="checkbox" [checked] = "isEnabled()" id="dateEnabled" aria-label="Checkbox for following text input" (change)="onCheckboxChange($event)"></div>        
+          <label for="dateEnabled" class="col-xs-4 col-form-label">Set Start and End Date</label>
+          <div class="col-md-3 form-group">
+            <input type="text" formControlName="startDate" [(ngModel)]="project.startDate" placeholder="Start Date" id="startDate" class="form-control date-input-style" bsDatepicker [ngClass]="{ 'is-invalid': submitted &amp;&amp; registerForm.controls.startDate.errors }">
+            <div *ngIf="submitted &amp;&amp; registerForm.controls.startDate.errors" class="text-danger">
+              <div *ngIf="registerForm.controls.startDate.errors.required">Start Date is required</div>
+          </div>
+          </div>
+          <div class="col-md-3 form-group">
+            <input type="text" formControlName="endDate" [(ngModel)]="project.endDate" placeholder="End Date" id="endDate" class="form-control date-input-style" bsDatepicker [ngClass]="{ 'is-invalid': submitted &amp;&amp; registerForm.controls.endDate.errors }" (blur)="compareTwoDates()">
+            <div *ngIf="submitted &amp;&amp; registerForm.controls.endDate.errors" class="text-danger">
+              <div *ngIf="registerForm.controls.endDate.errors.required">End Date is required</div>
+          </div>
+          <div *ngIf="dateError.isError" class="alert alert-danger">
+            {{ dateError.errorMessage }}
+         </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="sliderLabel" class="col-md-3 col-form-label">Priority:</label>
+          <div class="col-sm-8"> <ng5-slider [(value)]="value" [options]="options"></ng5-slider> </div>
+        </div>
+        <div class="form-group row">
+          <label for="manager" class="col-md-3 col-form-label">Manager:</label>
+          <div class="col-sm-6">
+            <input type="text"  formControlName="managerName"  [(ngModel)]="project.managerName" id="managerName" class="form-control" [ngClass]="{ 'is-invalid': submitted &amp;&amp; registerForm.controls.managerName.errors }">
+            <div *ngIf="submitted &amp;&amp; registerForm.controls.managerName.errors" class="text-danger">
+              <div *ngIf="registerForm.controls.managerName.errors.required">Manager is required</div>
+          </div>
+          </div>
+          <div class="col-sm-2">
+            <button type="button" id="searchManager" class="btn btn-dark btn-sm list-btn search-button" (click)="openUserModal()">Search</button>
+          </div>
+        </div> 
+        <button type="submit" id="add" class="btn btn-dark btn-sm">{{submitButtonName}}</button>
+        <button type="reset" id="reset" class="btn btn-dark btn-sm">Reset</button>         
+     </form>  
+     <hr style="height:1px;background-color:darkblue;">
+      <div class="row">
+          <div class="col col-sm-12"><input class="search form-control" [(ngModel)]="filterData" type="text" placeholder="Search.." aria-label="Search"></div>
+      </div>
+      <div class="row sort-style">
+      <span style="padding-top:1%;">Sort By:</span>
+      <button class="sort btn btn-dark btn-sm" data-sort="startDate"(click)="sortByDate('startDate')">Start Date</button>
+      <button class="sort btn btn-dark btn-sm" data-sort="endDate"(click)="sortByDate('endDate')">End Date</button>
+      <button class="sort btn btn-dark btn-sm" data-sort="priority"(click)="sortByPriority('priority')">Priority</button>
+      <button class="sort btn btn-dark btn-sm" data-sort="status"(click)="sortByCompleted('status')">Completed</button>
+    </div>
+    <hr style="border-top: 2px dotted darkblue;">
+    <div class="row">
+        <div class="col-md-12"*ngFor="let projectItem of projectList | filter: {projectName: filterData};">
+            <div class="list-group list">
+                <div class="row">
+                  <div class="col-md-8 projectDetail">
+                    <div class="row"><div class="col col-md-12 user-list-item">
+                      <b>Project:</b> 
+                      {{projectItem.projectName}}
+                    </div>
+                  </div>
+                    <div class="row"><div class="col col-md-6 user-list-item"><b>No: of Tasks:</b> {{projectItem.taskCount}}</div><div class="col col-md-6 user-list-item"><b>Completed:</b> {{projectItem.status}}</div></div>
+                    <div class="row"><div class="col col-md-6 user-list-item"><b>Start Date:</b> {{projectItem.startDate}}</div><div class="col col-md-6 user-list-item"><b>End Date:</b> {{projectItem.endDate}}</div></div>
+                  </div>
+                  <div class="col-md-2 projectPriority">
+                    <div class="row priorityHeading"><b>Priority</b></div>
+                    <div class="row priorityValue">{{projectItem.priority}}</div>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="row"><button type="button" id="update" (click)="editProject(projectItem)" class="btn btn-dark btn-sm list-btn">Update</button></div>
+                    <div class="row"><button type="button" id="suspend" (click)="deleteProject(projectItem)"class="btn btn-dark btn-sm list-btn">Suspend</button></div>
+                  </div>                   
+                </div>                              
+            </div>
+            <hr style="border-top: 2px dotted darkblue;">           
+        </div>
+    </div>
+  </div>
+  
+
